@@ -8,13 +8,13 @@ st.title("SQL Query Page")
 st.write("Run simple SQL queries on the customer dataset using pandasql.")
 
 # load dataset
-data = pd.read_csv("cleaned_good_bad_customers.csv")
+data=pd.read_csv("cleaned_good_bad_customers.csv")
 
 st.subheader("Dataset Preview")
 st.dataframe(data.head())
 
 st.subheader("Write your SQL query")
-query = st.text_area("", "")
+query=st.text_area("", "")
 
 if st.button("Run"):
     try:

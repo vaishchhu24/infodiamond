@@ -8,10 +8,10 @@ from joblib import dump
 
 def q(s): return ps.sqldf(s, globals())
 
-d = pd.read_csv("cleaned_good_bad_customers.csv")
-b = d.shape[0]
+d=pd.read_csv("cleaned_good_bad_customers.csv")
+b=d.shape[0]
 d.drop_duplicates(inplace=True)
-a = d.shape[0]
+a=d.shape[0]
 print(f"removed {b - a} dups, new shape {d.shape}")
 
 print("\ncols:", list(d.columns))
@@ -24,24 +24,24 @@ print("\nnums:", num)
 print("\ncats:", cat)
 
 for c in cat:
-    le = LabelEncoder()
-    d[c] = le.fit_transform(d[c].astype(str))
+    le=LabelEncoder()
+    d[c]=le.fit_transform(d[c].astype(str))
 
-X = d.drop("bad_client_target", axis=1)
-y = d["bad_client_target"]
+X=d.drop("bad_client_target", axis=1)
+y=d["bad_client_target"]
 
 xtr, xte, ytr, yte = train_test_split(X, y, train_size=0.8, random_state=42)
 
-sc = StandardScaler()
-xtr = sc.fit_transform(xtr)
-xte = sc.transform(xte)
+sc=StandardScaler()
+xtr=sc.fit_transform(xtr)
+xte=sc.transform(xte)
 
-clf = KNeighborsClassifier(n_neighbors=5)
+clf=KNeighborsClassifier(n_neighbors=5)
 clf.fit(xtr, ytr)
 
-yp = clf.predict(xte)
-acc = accuracy_score(yte, yp)
-f1 = f1_score(yte, yp)
+yp=clf.predict(xte)
+acc=accuracy_score(yte, yp)
+f1=f1_score(yte, yp)
 
 print(f"\nacc: {acc:.3f}")
 print(f"f1: {f1:.3f}")
