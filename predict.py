@@ -8,14 +8,12 @@ st.set_page_config(page_title="Prediction")
 st.title("Credit Risk Prediction Page")
 st.write("Use the trained KNN model to predict if a client is **Good (0)** or **Bad (1)**.")
 
-# Load model + scaler
 try:
     model=load("knn_classifier.joblib")
     scaler=load("scaler.joblib")
 except:
     st.stop()
 
-# Load dataset (to get column names)
 data=pd.read_csv("cleaned_good_bad_customers.csv")
 feature_cols=[c for c in data.columns if c != "bad_client_target"]
 
